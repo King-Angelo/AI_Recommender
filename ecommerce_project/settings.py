@@ -43,9 +43,21 @@ else:
         'ai-recommender-k0wy.onrender.com',
         '.onrender.com',  # Wildcard for any Render subdomain
         'localhost',
-        '127.0.0.1'
+        '127.0.0.1',
+        '0.0.0.0',  # Allow any IP address
+        '*'  # Allow any host (use with caution)
     ]
     print(f"Using default ALLOWED_HOSTS: {ALLOWED_HOSTS}")
+
+# Security settings
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 OPENAI_KEY = os.getenv("sk-proj-0123456789abcdef0123456789abcdef")
 MONGO_URI = os.getenv("vu#j$zf83slu1%-duw04g85_cs2+l%%m^_g1flthiwr4u5hr9_")
