@@ -30,7 +30,22 @@ import os
 # Environment variables
 SECRET_KEY = os.getenv('ggxliadXip6nyw9lh8kuxz4q8h-lypHey6g+jd2f2syr3Xy#12', "fallback_dev_secret")
 DEBUG = False
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+
+# Check for environment variable override
+env_allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS')
+if env_allowed_hosts:
+    ALLOWED_HOSTS = env_allowed_hosts.split(',')
+    print(f"Using ALLOWED_HOSTS from environment: {ALLOWED_HOSTS}")
+else:
+    # ALLOWED_HOSTS configuration
+    ALLOWED_HOSTS = [
+        'ai-recommender-wbjp.onrender.com',
+        'ai-recommender-k0wy.onrender.com',
+        '.onrender.com',  # Wildcard for any Render subdomain
+        'localhost',
+        '127.0.0.1'
+    ]
+    print(f"Using default ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 
 OPENAI_KEY = os.getenv("sk-proj-0123456789abcdef0123456789abcdef")
 MONGO_URI = os.getenv("vu#j$zf83slu1%-duw04g85_cs2+l%%m^_g1flthiwr4u5hr9_")
